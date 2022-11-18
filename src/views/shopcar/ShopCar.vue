@@ -1,10 +1,16 @@
 <template>
     <NavBar></NavBar>
     <div v-for="item, index in shopCarList" :key="index">
-        <van-card num="1" :price="item.goodsPrice" :desc="item.goodsInfo" :title="item.goodsTitle"
+        <van-card :num="item.goodsNum" :price="item.goodsPrice" :desc="item.goodsInfo" :title="item.goodsTitle"
             :thumb="item.goodsImg" :origin-price="item.goodsPrice * 10">
             <template #footer>
-                <van-stepper v-model="value" theme="round" button-size="22" />
+                <div class="my-counter">
+                    <van-button size="small" type="primary" class="btn btn-light" :disabled="item.goodsNum === 1"
+                        @click="item.goodsNum > 1 && item.goodsNum--">-</van-button>
+                    <input type="number" class="form-control inp" v-model.number="item.goodsNum">
+                    <van-button size="small" type="primary" class="btn btn-light" @click="item.goodsNum++">+
+                    </van-button>
+                </div>
             </template>
         </van-card>
     </div>
@@ -24,14 +30,27 @@ const { shopCarList } = storeToRefs(goodsStore)
 console.log(shopCarList.value)
 </script>
 
-<style lang="css">
-.van-card__tag {
+<style lang="less" scoped>
+.van-stepper {
     position: relative;
 }
 
-.van-stepper {
+.my-counter {
     position: absolute;
-    left: 280px;
-    top: 40px;
+    top: 25px;
+    left: 250px;
+
+    .inp {
+        height: 20px;
+        width: 34px;
+        text-align: center;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+
+    .btn {
+        height: 35px;
+    }
+
 }
 </style>
