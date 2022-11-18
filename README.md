@@ -1,8 +1,6 @@
 # BLM
 
 饱了么外卖前端部分
-okk
-改改该
 
 This template should help get you started developing with Vue 3 in Vite.
 
