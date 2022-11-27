@@ -13,7 +13,8 @@
                         autocomplete=“off” />
                 </van-cell-group>
                 <div style="margin: 16px">
-                    <van-button style="border-radius:10px" square block type="primary" native-type="submit">
+                    <van-button style="border-radius:10px" square block type="primary" native-type="submit"
+                        @click="login">
                         登录
                     </van-button>
                     <!-- <van-button @click="cl()" round block type="primary" native-type="submit">
@@ -29,6 +30,7 @@
 </template>
 
 <script setup>
+import { checkUser } from '../../api/index'
 import ToolBar from '../../components/toolBar/ToolBar.vue'
 import logoImg from '../../assets/logo.png'
 import { ref, reactive, computed } from "vue"
@@ -51,9 +53,24 @@ const loginInfo = reactive({
 })
 
 const onSubmit = (values) => {
-    console.log(values)
+    // checkUser(loginInfo)
 }
 
+const login = async () => {
+    const res = await checkUser(loginInfo)
+    console.log(res.data)
+    if (res.data.code === 1) {
+        Toast({
+            message: "登录失败,请检查用户名或密码！",
+        })
+    } else if (res.data.code === 0) {
+        Toast({
+            message: "登录成功！",
+        })
+        sessionStorage.setItem('username', loginInfo.username)
+        router.push('/home')
+    }
+}
 
 </script>
 

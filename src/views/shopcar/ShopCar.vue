@@ -14,12 +14,14 @@
             </template>
         </van-card>
     </div>
+    <ShopFooter></ShopFooter>
     <ToolBar></ToolBar>
 </template>
 
 <script setup>
 import ToolBar from '../../components/toolBar/ToolBar.vue'
 import NavBar from '../../components/navBar/NavBar.vue'
+import ShopFooter from './ShopFooter.vue'
 import { storeToRefs } from 'pinia'
 import { ref, reactive, computed } from "vue"
 import useGoodsStore from '../../store/goodsStore'
@@ -27,7 +29,7 @@ import useGoodsStore from '../../store/goodsStore'
 const value = ref('')
 const goodsStore = useGoodsStore()
 const { shopCarList } = storeToRefs(goodsStore)
-console.log(shopCarList.value)
+// console.log(shopCarList.value)
 </script>
 
 <style lang="less" scoped>

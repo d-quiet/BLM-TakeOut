@@ -3,7 +3,10 @@
         <van-cell-group inset>
             <van-cell icon="location-o" value="江苏省徐州市鼓楼区襄王路1号">
                 <!-- 使用 right-icon 插槽来自定义右侧图标 -->
-                <template #right-icon>
+                <template v-if="username" #right-icon>
+                    欢迎: {{ username }}
+                </template>
+                <template v-else #right-icon>
                     <van-icon name="user-circle-o" class="user-circle-o" />
                 </template>
             </van-cell>
@@ -34,7 +37,14 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
 import { ref, reactive, computed } from "vue"
+import userStore from '../../store/userStore'
+
+const Store = userStore()
+const { username } = storeToRefs(Store)
+console.log(username.value)
+
 const classify = reactive([
     {
         imgName: '超市',
